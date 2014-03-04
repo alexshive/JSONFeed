@@ -24,7 +24,9 @@ Access to the JSON via: `http://coppermineurl/index.php?file=JSONFeed/json`
 - Total albums per page (overrides default amount)
 	- Ex: `http://coppermineurl/index.php?file=JSONFeed/json&aid=2&totalalbums=10&page=2`
 - Total random photos (overrides default amount)
-	- Ex: `http://coppermineurl/index.php?file=JSONFeed/json&aid=2&totalrandom=10`	
+	- Ex: `http://coppermineurl/index.php?file=JSONFeed/json&aid=2&totalrandom=10`
+	
+
 #### Optional Parameters
 
 - Debug (must equal to 1, using *true* won't work)
