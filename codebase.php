@@ -8,20 +8,20 @@ if (!defined('IN_COPPERMINE')) {
 }
 
 // Add plugin_install action
-$thisplugin->add_action('plugin_install','xfd_install');
+$thisplugin->add_action('plugin_install','jsonfeed_install');
 
 // Add plugin_uninstall action
-$thisplugin->add_action('plugin_uninstall','xfd_uninstall');
+$thisplugin->add_action('plugin_uninstall','jsonfeed_uninstall');
 
 // Install
-function xfd_install()
+function jsonfeed_install()
 {
 	return true;
 }
 
 
 // Unnstall and drop settings table
-function xfd_uninstall()
+function jsonfeed_uninstall()
 {
 	return true;
 }
