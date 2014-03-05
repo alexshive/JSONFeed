@@ -115,6 +115,8 @@ if ($album_id > 0 || $category > 0) {
 	
 	$json['current_amount'] = $start;
 	if( ($start + $total['photos']) < $total_count_album) $json['more'] = true;
+
+	$json['pages'] = ceil($total_count_album / $total['photos']);
 			
 	$result = cpg_db_query($query);
 	$pic_data = cpg_db_fetch_rowset($result);
