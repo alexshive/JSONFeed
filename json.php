@@ -10,9 +10,9 @@ $version = '1';
 // total to show
 // adjust defaults here
 $total = array(
-	'photos' => 10,
-	'random' => 10,
-	'albums' => 99
+	'photos' => 10, // number photos to display in album/front page
+	'random' => 10, // number of random photos to display
+	'albums' => 10 //  number of latest albums to display
 );
 
 $base = rtrim($CONFIG['ecards_more_pic_target'], '/');
@@ -113,9 +113,8 @@ if ($album_id > 0 || $category > 0) {
 	$count_result_row = cpg_db_fetch_row($count_result);
 	$total_count_album = $count_result_row['total'];
 	
-	$start_count = $start;
-	if($start_count == 0) $start_count = $total['photos'];
-	if($start_count < $total_count_album) $json['more'] = true;
+	$json['current_amount'] = $start;
+	if( ($start + $total['photos']) < $total_count_album) $json['more'] = true;
 			
 	$result = cpg_db_query($query);
 	$pic_data = cpg_db_fetch_rowset($result);
@@ -126,10 +125,6 @@ if ($album_id > 0 || $category > 0) {
 	
 	$query = "SELECT pid,aid,filepath,filename,url_prefix FROM {$CONFIG['TABLE_PICTURES']} WHERE approved = 'YES' ORDER BY pid DESC LIMIT " . $start . ", " .$total['photos'];
 	
-	$start_count = $start;
-	if($start_count == 0) $start_count = $total['photos'];
-	if($start_count < $total_count) $json['more'] = true;
-			
 	$result = cpg_db_query($query);
 	$pic_data = cpg_db_fetch_rowset($result);
 	
@@ -149,7 +144,6 @@ if ($album_id > 0 || $category > 0) {
 
 	// LATEST ALBUMS
 	$latest_album_query = "SELECT r.aid, a.thumb, a.title, MAX(ctime) AS ctime FROM {$CONFIG['TABLE_PICTURES']} AS r INNER JOIN {$CONFIG['TABLE_ALBUMS']} AS a ON a.aid = r.aid WHERE (1) AND approved = 'YES' GROUP BY r.aid ORDER BY ctime DESC LIMIT 0 ," . $total['albums'];
-	// echo $latest_album_query;
 	$latest_album_result = cpg_db_query($latest_album_query);
 	$latest_album_data = cpg_db_fetch_rowset($latest_album_result);
 	if($latest_album_data) {
